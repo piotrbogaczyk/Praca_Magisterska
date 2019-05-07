@@ -1,0 +1,297 @@
+\documentclass[oneside]{mgr}
+
+\usepackage{polski}      
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{indentfirst}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{color}
+
+%pakiety do grafiki
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{psfrag}
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage{supertabular}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{hhline}
+\usepackage{showlabels}
+\usepackage{gensymb}
+
+%definicje wÄšÂasnych poleceÄšÂ
+\newcommand{\R}{I\!\!R} %symbol liczb rzeczywistych, dziaÄšÂa tylko w
+                        %trybie matematycznym
+\newtheorem{theorem}{Twierdzenie}[section] %nowe otoczenie do
+                                           %skÄšÂadania twierdzeÄšÂ
+\title{Badanie pracy wentylatorowego układu chłodzenia z ogniwami Peltira}
+\engtitle{Control of the cooling system with Peltier module}
+\author{Piotr Bogaczyk}
+\supervisor{dr inż. Jacek Jagodziński W-4/K-8}
+\field{Automatyka i Robotyka (AIR)}
+\specialisation{Systemy informatyczne w automatyce (ASI)}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Wstęp}
+Tematem niniejszej pracy jest projekt układu dla badania ogniwa Peltiera które zostało wykorzystane do regulacji temperatury w komorze chłodniczej. Praca składa się z czterech głównych części: teoretycznej opisującej podstawowe prawa i zasady termoelektryczne takie jak efekt Seebecka, efekt Peltiera czy efekt Thomsona, wdrożeniowej w skład której wchodzi opis realizacji układu chłodniczego z wykorzystaniem ogniwa Peltiera, identyfikacyjnej zawierającej opis wykonanych badań w celu pozwalających na identyfikacje obiektu oraz opisu zaimplementowanych sposobów regulacji temperatury w komorze chłodniczej wraz z ich porównaniem. Dodatkowo w pracy zostały zawarte schematy elektryczne wykorzystanych urządzeń elektrycznych wykonane przy pomocy programu Eplan.
+
+\section{Cel i zakres pracy}
+
+Celem pracy jest zaprojektowanie i budowa oraz wysterowanie obiektu który pozwoli na regulację temperatury wewnątrz komory termicznej wykorzystując ogniwo Peltiera jako pompę ciepła.
+
+W pracy została opisana zasada działania oraz budowa modułu Peltiera. Opisano również podstawowe zjawiska termoelektryczne które towarzyszą zmianą temperatury w badanych ogniwach termoelektrycznych.
+
+Został zbudowany obiekt badawczy pozwalający na grzanie lub chłodzenie przestrzeni wewnątrz kasety wykonanej z szkła akrylowego. Efekty działania urządzenia badane są przy wykorzystaniu trzech termopar typu PT-10. Pozwalają one na pomiar temperatury strony ciepłej oraz chłodnej ogniwa Peltiera oraz pomiar temperatury bezpośrednio wewnątrz zbudowanej komory termicznej. Oddawanie oraz pobieranie ciepła przez ogniwo Peltiera zostało usprawnione przez wykorzystane w projekcie radiatory wspomagane wentylatorami. Dodatkowo wewnątrz komory zostały zamontowane cztery rezystory wysokich mocy. Rezystory zostały zastosowane w celu wprowadzania do układu zakłóceń.
+
+W celu regulacji i wysterowania zbudowanego układu zastosowany został sterownik cykliczny PLC serii: LOGO!8 marki siemens, który pozwala na płynną regulację temperatury wewnątrz komory termicznej. Regulacji temperatury dokonuje się na podstawie odczytu danych z trzech termometrów wykorzystanych w projekcie. W pracy zostały przedstawione i porównane trzy typy regulacji: regulacja krokowa, regulacja typu PI oraz regulacja predykcyjna.
+
+\section{Założenia projektowe}
+Praca zakłada stworzenie układu pozwalającego na płynną regulację temperatury w komorze termicznej z wykorzystaniem sterownika PLC LOGO!8. W pracy założono ,że temperatura na zewnątrz stacji jest stała i niezmienna w czasie.
+
+Sygnały pomiarowe oraz sterujące są przekazywane do i z sterownika za pomocą przewodów poprowadzonych w zamaskowanych szynach. Projekt zakłada brak zakłóceń w trakcie transmisji sygnałów.
+
+Praca zawiera schematy elektryczne które zostały wykonane za pomocą programu EPLAN w standardzie jednokreskowym. Wszystkie schematy zostały wykonane zgodnie z praktyką inżynierską i zawarte w załączniku numer 1: „Schematy elektryczne”.
+
+\chapter{Teoria chłodnictwa termoelektrycznego}
+Istotą modułów Peltiera są zmiany temperatury które zachodzą na złączach półprzewodnikowych (n-p lub p-n) z powodu oddziaływania na nie prądem elektrycznym. Takie zmiany temperatury znajdują szerokie zastosowanie w chłodnictwie. Zastosowanie ogniw Peltiera w chłodnictwie pozwala na wysoce bezawaryjną pracę chłodziarki w różnych orientacjach. 
+Ponieważ napięcie elektryczne jest łatwe do kontrolowania i może być dokładnie zapisane, urządzenia wykorzystujące efekt termoelektryczny umożliwiają bardzo precyzyjną regulację temperatury i automatyzację procesów chłodzenia i ogrzewania. W zależności od kierunku transformacji efekty termoelektryczne dzielą się na:
+
+\subsection{Efekt Seebecka}
+Efekt Seebecka polega na powstawaniu siły termoelektrycznej w otwartym obwodzie złożonym z dwóch różnych półprzewodników jeżeli temperatury ich spoin są utrzymywane w różnych temperaturach. Przy zamknięciu obwodu następuje przepływ prądu który ściśle zależy od różnicy temperatur półprzewodników oraz materiałów z których są wykonane. Obwód taki nazywany jest termoelementem w technice chłodniczej oraz termoparą w technice cieplnej[1].
+\begin{eqnarray}
+    e_{AB}(T) \approx U_0 + \alpha \cdot T\\
+    e_{BA}(T) \approx -U_0 + -\alpha \cdot T_0 \nonumber
+\end{eqnarray}
+gdzie: \\
+$U_0$ napięcie kontaktowe \\
+$T$,$T_0$ – temperatura złączy materiałów $A$ i $B$ \\
+$\alpha$ - współczynnik Seebecka obwodu \\
+
+W przewodnikach typu "p-n" występują dwa typy przewodności. Odpowiednio przewodność elektronowa w której nośnikami ładunków są elektrony i dziurowa w której nośnikami są dodatnio naładowane dziury. Jeśli moduł składa się z półprzewodników tego samego typu, w takim wypadku siły termoelektryczne które występują w obwodzie posiadają przeciwne zwroty[1]:
+\begin{eqnarray}
+    a_p=a_{p1}-a_{p2}, \qquad a_n=a_{n1}-a_{n2}
+\end{eqnarray}
+Przy różnych rodzajach przewodności spoin siły termoelektromotoryczne sumują się:
+\begin{eqnarray}
+    \Bar{\alpha}=|\alpha_p|+|\alpha_n|
+\end{eqnarray}
+
+W konsekwencji termoelementy wykonuje się głównie z materiałów o różnej przewodności: elektronowej i dziurowej. W konsekwencji każdy zestaw p-n składa się z dwóch gałęzi: typu "n" oraz "p" nazywanych również półelementami. Półelementy typu "p" oraz "n" są połączone ze sobą tak zwanymi mostkami do których są przymocowane przy pomocy lutowania miękiego lub specjalistycznego kleju przewodzącego. Mostki łączące zwykle wykonuje się z miedzi[1] (rys. 2.1)
+
+Takie szeregowe naprzemienne połączenie par przewodników "p" i "n" stanowi siłę termoelektromotoryczną modułu. Wyznacza się ją z zależności[1]:
+
+\begin{eqnarray}
+    E = n \int_{T_gor}^{T_z}(|\alpha_p|+|\alpha_n|)dT
+\end{eqnarray}
+gdzie: \\
+$n$ - liczba termoelementów \\
+$T_{gor}$ - temperatura strony gorącej termoelementu \\
+$T_z$ - temperatura strony zimnej termoelementu
+\subsection{Efekt Peltiera}
+Efektem Peltiera nazywamy zjawisko odwrotne do zjawiska Seebecka, polega ono na wydzielaniu się lub pochłanianiu ciepła na spoinach termoelementu w trakcie przepływu przez niego prądu. Strumień takiego ciepła nazywany jest ciepłem Peltiera i można go wyznaczyć przy pomocy wzoru[1]:
+\begin{equation}
+    Q_p = \pi I
+\end{equation}
+gdzie: \\
+$\pi$ - współczynnik Peltiera \\
+$I$ - natężenie prądu \\
+
+W zależności od kierunku przepływu prądu ciepło może być pochłaniane lub oddawane do otoczenia.
+\subsection{Efekt Thomsona}
+Chronologicznie trzecim odkrytym efektem termoelektrycznym jest efekt Thomsona. Jego istotą jest to ,że przy przepływie prądu stałego przez przewodnik lub półprzewodnik, w którym już istnieje gradient temperatury, w uzupełnieniu do ciepła Joule'a wydziela się, bądź jest pochłaniana pewna ilość ciepła które nazywane jest ciepłem Thomsona[1]. Jest to spowodowane zwiększaniem się energii elektronów swobodnych wraz z wzrostem temperatury. Dla metali wykorzystywanych w termoelementach efekt Thomsona jest minimalny i można go nie uwzględniać w obliczeniach.
+
+W trakcie pracy termoelementu można zaobserwować wszystkie trzy zjawiska: Seebecka, Peltiera oraz Thomsona które wzajemnie na siebie oddziałują.
+
+Jedną z zależności jest zależność współczynnika Peltiera od siły termoelektromotorycznej:
+\begin{equation}
+    \pi = \alpha T
+\end{equation}
+Również można zauważyć zależność współczynnikami siły termoeletromotorycznej a współczynnikiem Thomsona $\beta$:
+\begin{equation}
+    \beta = (\frac{d\alpha}{dt})T
+\end{equation}
+
+Powyższe równanie przedstaawia zależność współczynnika $\beta$ od znaku pochodnej $\frac{d\alpha}{dt}$. Generalnie stosunek siły termoelektrycznej do temperatury ma charakterystykę nieliniową z przedziałami zarówno rosnącymi jak i malejącymi. Zatem dla jednego materiału współczynnik Thomsona może być zarówno ujemny jak i dodatni.
+
+Inną zależnością jest związek między siłą termoelektromotoryczną a współczynnikiem Peltiera:
+\begin{equation}
+    \pi = \alpha T
+\end{equation}
+Wykorzystanie zależności Thomsona podczas pracy termoelementu pozwala na zmniejszenie liczby zmiennych niezależnych, upraszczając znacząco otrzymany układ równań. 
+
+\section{Termoelektryczny moduł Peltiera}
+\subsection{Budowa i działanei modułów termoelektrycznych:}
+Ogniwo Peltiera nazywane również modułem Peltiera bądź płytką Peltiera jest półprzewodnikowym elementem termoelektrycznym, który wykorzystuje zjawisko Peltiera do wymiany ciepła. Typowy moduł Peltiera składa się z dwóch równolegle ułożonych do siebie płytek ceramicznych pomiędzy którymi na przemian są rozmieszczone półprzewodniki typu "n" oraz "p". Naprzemiennie ułożone półprzewodniki wykonane są z odpowiednio domieszkowanego tellerku bizmutu i są one ze sobą połączone szeregowo przy pomocy miedzianych płytek.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{modul_peltiera.jpg}
+    \caption{Schemat ideowy termoelementu}
+\end{figure}
+
+Półprzewodnik typu „p” nie ma w swojej strukturze wystarczającej ilości elektronów, aby całkowicie „wypełnić” górny poziom energetyczny, podczas gdy półprzewodnik typu „n” ma ich zbyt wiele. W momencie zasilenia modułu prądem elektrycznym elektrony poruszają się między poziomami energii - co w jednym przypadku wymaga energii (przejście na wyższy poziom energetyczny), a w innym powoduje jej emisję (spadek do niższego poziomu) - w zależności od kierunku przepływu prądu. Zarówno zużyta energia, jak i oddana są w tym przypadku energią cieplną. Na górnej jak i dolnej powierzchni jednocześnie zachodzi pochłanianie ciepła („zimna strona”) i jego oddawanie („gorąca strona”). Dlatego działanie modułów termoelektrycznych często jest porównywane do działania pompy cieplnej.
+
+Ilość ciepła, które można transportować w ten sposób, zależy od natężenia przyłożonego do termoelementu prądu elektrycznego. Oczywistością jest fkt że, gdy prąd przepływa przez system, pewna ilość ciepła powstaje również w samym module (z powodu rezystancji elektrycznej powstaje ciepło Joule'a). Z tego powodu każdy moduł Peltiera charakteryzuje się  pewną maksymalną wydajnością cieplną.
+
+Ważną cechą jest również możliwość łączenia modułów tak, aby „zimna” strona następnego modułu przylegała do „gorącej” strony poprzedniego modułu,
+co skutkuje uzyskaniem wyższej wydajności. Biorąc pod uwagę ciepło wytwarzane przez rezystancję prądu elektrycznego, który jest również odprowadzany do „gorącej” strony, takie połączenia są zwykle wykonywane w sposób piramidalny - tak że końcowa powierzchnia emitująca ciepło jest większa niż powierzchnia pochłaniająca. Takie połączenie modułów termoelektrycznych, pod względem zwiększenia wydajności stanowi alternatywę dla zwiększenia prądu przepływającego przez system.
+
+Z uwagi na dużą ilość energii cieplnej(od kilkunastu do nawet kilkuset wat) oddawanej przez "gorącą" stronę, zaleca się stosowanie dodatkowego chłodzenia do ogniw. Najczęściej wykorzystuje się w tym celu radiatory które mogą być dodatkowo wentylowane. Ważne jest również użycie pomiędzy ogniwem a elementem odprowadzającym ciepło pasty przewodzącej która poprawia przepływ ciepła. Wykorzystanie dodatkowych form odprowadzania ciepła ma szczególne znaczenie w przypadku łączenia termoelementów kiedy energia cieplna emitowana przez nie kumuluje się na każdym kolejnym poziomie. 
+
+\subsection{Parametry modułów termoelektrycznych}
+
+W większości literaury parametry ogniw termoelektrycznych są dzielone na dwie grupy: użytkowe i konstrukcyjne. Jednym z głównych parametrów ogniw jest ich maksymalna wydajność chłodnicza $Q_{0(\max)} [W]$ i wytwarzana maksymalna różnica temperatur pomiędzy zimną a ciepłą stroną ogniwa $\Delta T_{\max} [^{\circ} C]$
+
+$Q_{0(\max)}$ wyznaczane jest przy stałej temperaturze górnego źródła ciepłą(z zasady $T_{gor}=+27^\circ C$)[1] i przy zerowej różnicy temperatur pomiędzy stroną zimną a ciepłą modułu czyli $\Delta T_{\max} = T_{gor} - T_z = 0 [^{\circ} C]$. $\Delta T_{\max}$ wyznaczane jest gdy ogniwo nie jest cieplnie obciążone, wtedy gdy wartość $Q_0 = 0$ i gdy temperatura strony gorącej jest stała.
+
+Przedstawione dwie podstawowe wartości odpowiadają punktom przecięcia $Q_0 (\Delta T)$ z osiami układów współrzędnych[1]. Ważną wielkością umieszczaną w charakterystyce każdego modułu jest również $I_{opt}$ jak i inne ważne parametry eksploatacyjne takie jak np. napięcie zasilania czy opór elektryczny modułu.
+
+Oporem prądu zmiennego jest nazywana rezystancja występująca przy $\Delta T = 0$ a więc przy zerowej różnicy temperatur pomiędzy stroną gorącą a zimną ogniwa. Przyjęło się ,że opór taki przyjmuje oznaczenie $R_\sim$, opór prądu stałego jest oznaczany natomiast symbolem $R_=$. Z powodu działania elektrodynamicznej siły Seebecka opór elektryczny termoelementu znacząco zmniejsza się wraz z wzrostem temperatury spoin. Dlatego rozróżniane są różne rezystancje. Opisane wartości opisuje zależność:
+\begin{equation}
+    U = IR_ = (\text{przy założeniu } \Delta T = \text{const})
+\end{equation}
+
+Z kolei paramertry kostrukcyjne modułów termoelektrycznych to między innymi:
+\begin{itemize}
+    \item wymiary modułu (wysokość, szerokość i długość podawana w milimetrach)
+    \item masa modułu (podawana w gramach)
+    \item materiał z którego ogniwo zostało wykonane
+    \item ilość naprzemiennie ułożonych złącz p-n
+    \item przewidywany czas pracy lub średni okres lat działania
+    \item maksymalna ilość przełączeń trybów pracy (grzanie/chłodzenie).
+\end{itemize}
+
+\subsubsection{Parametr Z modułu i jego pomiar}
+Z przytoczonych wyżej informacji wynika ,że materiał z którego wykonane są złącza p-n powinien mieć jak anajmniejszą rezystancję i przewodność cieplną a jak najlepsze właściwości związane z zjawiskiem Peltiera. Niestety obe te wymagania wzajemnie się wykluczają.
+
+W celu uzyskania jak najmniejszego oporu modułu termoelektrycznego jego złącza powinny mieć jak największy przekrój i być jak najniższe, jednakże takie rozwiązanie spowoduje szybkie nagrzewanie się strony zimnej od strony gorącej. Dlatego konstrukcja modułu termoelektrycznego wymaga znalezienia złotego środka pomiędzy opornością a wysokością złącz.
+
+W celu wyznaczenia dobroci materiału i jego przydatności do budowy ogniw Peltiera wprowadzono parametr $Z$ którego pomiaru dokonuje się metodą Harmana:
+\begin{equation}
+    Z = \frac{\alpha^2}{kR}
+\end{equation}
+gdzie: \\
+$k$ - współczynnik przenikania ciepła \\
+$R$ - wartość oporu elektrycznego \\
+$\alpha$ - średnia wartość współczynnika siły termoelektromotorycznej dwóch gałęzi w przedziale temperatur $T_{gor}-T_z$ \\
+
+Z dotychczasowo znanej literatury wynika ,że najlepszą dobrocią charakteryzuje się wczśniej wspomniany półprzewodnik tellurek bizmutu - $Bi_2 Te_3$.
+
+\subsubsection{Pomiar i wyznaczenie maksymalnej różnicy temperatur $\Delta T_{\max}$}
+
+Pomiaru maksymalnej różnicy temperatur strony zimnej i gorącej modułu termoelektrycznego dokonuje się za pomocą systemu składającego się z bardzo dobrze chłodzonej podstawy. Chłodzenie najczęściej jest realizowane przy pomocy radiatora dodatkowo chłodzonego wodą bądź powietrzem której temperatura jest utrzymywana na stałym poziomie. Do połączenia modułu z radiatorem stosuje się pastę termoprzewodzącej która poprawia przewodnictwo cieplne układu. Bezpośrednio przy stronie zimnej jak i gorącej modułu w odpowiednich zagłębieniach znajdują się termparary które mierzą $T_{gor}$ oraz $T_{ch}$ modułu. W przestrzeni w której znajduje się badany obiekt w celu zmniejszenia obciążenia cieplnego stosuje się obniżenie ciśnienia do $10^{-3} \dots 10^{-4}$ mmHg. Dalsze obniżanie ciśnienia nie ma wpływu na polepszenie dokładności wyników pomiarów. W celu dalszej poprawy wyników stosuje się ograniczenie dostępności światłdo obiektu bądź otoczneie całego systemu odpowiednim ekranem chłodzącym którego temperatura będzie utrzymywany blisko $T_{ch}$. Poprzez stopniowe zwiększanie natężenia prądu wyznaczyć można wyznaczyć minimalną temperaturę strony zimnej. Pozwala to na wyznaczenie $\Delta T_{\max}$ i parametru $Z$. Wykorzystanie tej metody do wyznaczenia parametru $Z$ nie uwzględnia ciepła Thomsona[1], co powoduje zawyżenie wartości $Z$.
+
+Na podstawie[1] w celu dokładnego wyznaczenia parametru $Z$ należy skorzystać z poprawionego wzoru:
+\begin{equation}
+    Z = 2 \Delta T_{\max}/{T_{ch}^2}_{(\min)}[1/3(\Delta T_{\max}/T_{ch}(\beta/\alpha))]
+\end{equation}
+gdzie:\\
+$\beta$ - współczynnik Thomsona z równania (2.7). \\
+
+A więc aby precyzyjniej wyznaczyć parametr $Z$ należy znać $\alpha$ orza $\beta$. Aby uzyskać jak najbardziej dokładne wyniki należy zadbać aby chłodzenie badanego modułu było jak najlepsze poprzez chłodzenie powietrzem bądź wodą. Zabieg taki pozwoli na ograniczenie podgrzewania strony grzejącej ogniwa przez stronę chłodzącą.
+
+Zmierzone $\Delta T_{\max}$ przedstawioną powyżej metodą(pomiar dokonywany w próżni) z reguły przedstawiane jest charakterystykach modułów termoelektrycznych. Te same badania wykonane bez wykorzystania próżni pozwala na uzyskanie wyników około 20\% mniejszych.
+
+\subsubsection{Wyznaczenie i pomiar $Q_{0(\max)}$ modułu}
+
+Stanowisko do pomiaru parametru $Q_{0(\max)}$ modułu termoelektrycznego wygląda podobnie do stanowiska do pomiaru $\Delta T_{\max}$ z tą różniczą ,że zamiast stosowania próżni stosuje się odpowiednią izolację termiczną. Zabieg ten wykonuje się w celu ograniczenia wpływu ciepła pochodzącego z otoczenia na badany moduł. Najczęściej wykorzystywanym materiałem do izolacji obiektu jest poliuretan o grubości do 50 mm. Moduł termoelektryczny zasilany jest przy pomocy zasilacza, pozwalającego w precyzyjny sposób kontrolować napięcie i natężenie prądu elektrycznego. Wymnożenie napięcia i natężenia prądu pozwala otrzymać moc elektryczną. Przyjmuje się ,że 100\% tej mocy zamienia się na ciepło ,które przejmuje moduł[1]. Zastosowane termoelektryczne czujniki temperatury bezpośrednio przy stronie chłodnej i gorącej modułu pozwalają na bieżący pomiar temperatury. Poprzez równomierne zwiększanie napięcia, należy ustalić stan równowagi w którym $\Delta T = 0$ a więc temperatura strony gorącej modułu zrówna się z temperaturą strony chłodnej. Uzyskana w taki sposób moc jest maksymalną wydajnością chłodniczą modułu termoelektrycznego $Q_{0(\max)}$. Ważne jest aby wszystkie parametry wyznaczać przy wspólnych warunkach początkowych modułu.
+
+\subsection{Wykorzystanie ogniw Peltiera}
+
+Ogniwa Peltiera dzięki swojej nieskomplikowanej budowie, małym rozmiarom oraz niezawodności znalazły szerokie zastosowanie jako pompy cieplne. Ogniwa stosuje się do budowy urządzeń chłodniczych wykorzystywanych w sprzętach gospodarstwa domowego jak i w zaawansowanych technologicznie systemach chłodzenia wykorzystywanych w przemyśle oraz medycynie. Stanowią one doskonałe uzupełnienie sprzętu chłodniczego gdy zależy nam na pracy układu w różnych położeniach jak i braku szkodliwych substancji (np. freonu).
+
+Najczęściej moduły Peltiera stosuje się:
+\begin{itemize}
+    \item chłodzenie nagrzewających się urządzeń elektrycznych
+    \item komory klimatyczne
+    \item chłodzenie diod wykorzystywanych w laserach wysokich mocy
+    \item przenośne i stacjonarne urządzenia klimatyzacyjne
+    \item termostaty wykorzystywane w akwarystyce
+    \item przenoścne lodówki
+\end{itemize}
+
+Niezwykle ważnym zastosowaniem ogniw Peltiera jest również zastosowanie ich do produkcji prądu elektrycznego korzystając z zjawiska Seebecka. Ciekawostką jest fakt ,że niektóre bezzałogowe statki kosmiczne (w tym łazik Curiosity Mars) wykorzystują radioizotopowe generatory termoelektryczne (RTG), które przekształcają energię cieplną w energię elektryczną za pomocą efektu Seebecka. Urządzenia mogą przetrwać kilka dziesięcioleci, ponieważ są napędzane przez rozpad wysokoenergetycznych materiałów radioaktywnych.
+
+\chapter{Realizacja stacji badawczej z komorą termiczną}
+\section{Opis obiektu}
+
+W celu zrealizowania systemu pozwalającego na badanie i regulacje temperatury z wykorzystaniem ogniw Peltiera został zbudowany obiekt badawczy. Urządzenie składa się z stelażu wykonanego z profili aluminiowych na którym zostały osadzone urządzenia sterujące, pomiarowe oraz wykonawcze. Dodatkowo została wykonana komora z każdej strony ogrodzona przez pleksi która pozwala utrzymać wewnątrz określoną temperaturę. Istnieje możliwość wyjęcia całego systemu chłodzącego w skład którego wchodzi ogniwo wraz z radiatorami i wentylatorami. Aby tego dokonać należy odłączyć złącze, odkręcić śrubki motylkowe i delikatnie wysunąć górną część komory wraz z wszystkimi elementami wykonawczymi. Zabieg ten może zostać wykonany w wypadku konieczności konserwacji urządzenia bądź wyczyszczenia komory chłodzącej. Dodatkowo temperatura wewnątrz komory badawczej może być zakłócana poprzez zastosowanie czterech sterowanych analogowo rezystorów wysokich mocy. Każdy z rezystorów charakteryzuje się mocą 50W. Urządzenie pozwala na mocą grzewczą rezystorów w zakresie 0-100\%.
+
+Elementami pomiarowymi które są odpowiedzialne za mierzenie temperatury  w czasie rzeczywistym są trzy termopary ($T_1, T_2, T_3$) które zostały zainstalowane bezpośrednio przy stronie gorącej oraz zimnej modułu jak i wewnątrz komory termicznej. Takie rozwiązanie pozwala na zmierzenie różnicy temperatur po stronie gorącej i chłodnej ogniwa oraz wewnątrz zbudowanej komory termicznej. Dodatkowo w celu odprowadzania z ogniwa ciepła oraz zimna w układzie zastosowane zostały radiatory które wspomagane są przez wentylatory obrotowe. Takie rozwiązanie pozwala na efektyne chłodzenie ogniwa w trakcie pracy z maksymalnym obciążeniem cieplnym.
+
+W celu sterowania temperaturą wewnątrz komory termicznej został zastosowany sterownik cykliczny PLC serii LOGO!8 wraz z modułem analogowym. Zastosowanie sterownika pozwala na nieprzerwaną i bezawaryjną pracę układu wraz z możliwością precyzyjnego utrzymywania zadanych parametrów. Dodatkowo dzięki wspieraniu przez sterownik pakietu Microsoft Office możliwe jest łatwe zapisywanie mierzonych parametrów w bazie danych i ich późniejsza analiza.Całym obiektem można sterować na dwa sposoby. Ręcznie z wykorzystaniem zadajnika prądowego wraz z panelem HMI LOGO! TDE. Podłączając do układu komputer przy pomocy kabla ethernet. 
+
+Wszystkie przewody sygnałowe oraz sterujące zastosowane w obiekcie zostały poprowadzone w zębatych listwach prowadzących. Wszystkie elementy sterujące jak i zasilające zostały osadzone na listwach przemysłowych. Panel operatorki oraz panel sterujący zadajnika prądowego został osadzony w pleksi. Zastosowanie takich rozwiązań pozwoliło zachować należytą estetykę układu i poprawić jego przejżystość(rys. 3.1).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{obiekt_front.jpg}
+    \includegraphics[width=\textwidth]{obiekt_front.jpg}
+    \caption{Schemat ideowy urządzenia}
+\end{figure}
+
+\section{Wykaz elementów}
+Poniżej zostały przedstawione kolejno urządzenia odpowiedzialne za sterowanie układem, urządzenia wykonawcze oraz urządzenia pomiarowe. Przedstawione również zostały sygnały które każde z urządzeń odbiera i generuje wraz z krótkim ich opisem.
+\subsection{Urządzenia sterujące}
+Do urządzeń sterujących układem zaliczany jest sterownik PLC: LOGO!8 wraz z modułem analogowym oraz zadajnik prądowy typu: pozwalający manualnie ustawić napięcie i natężenie prądu płynącego przez badane ogniwo termoelektryczne.
+\newline
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+    Lp. & \multicolumn{2}{|c|}{Urządzenie} & Typ & Sygnał & Opis \\\hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Urządzenia wykonawcze}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+    Lp. & \multicolumn{2}{|c|}{Urządzenie} & Typ & Sygnał & Opis \\\hline
+\end{tabular}
+\end{center}
+\subsection{Urządzenia pomiarowe}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+    Lp. & \multicolumn{2}{|c|}{Urządzenie} & Typ & Sygnał & Opis \\\hline
+\end{tabular}
+\end{center}
+\section{Uruchomienie i obsługa urządzenia}
+Poniżej został przedstawiony schemat postępowania w celu uruchomienia urządzenia:
+\begin{enumerate}
+    \item Podłączenie obiektu do źródła prądu przemiennego 230V przy pomocy przewodu zasilającego.
+    \item Włączyć cały układ przy pomocy zmiany pozycji dźwigni bezpiecznika B6 znajdującego się z tyłu urządzenia. Po wykonaniu tej czynności powinniśmy zauważyć uruchomienie się sterownika PLC w tryb "run" oraz uruchomienie panelu HMI oraz ekranu zadajnika prądowego.
+    \item Zewnętrzy komputer podłączyć do urządzenia przy pomocy przewodu ethernet.
+    \item Uruchomić specjalistyczne oprogramowanie i połączyć się z urządzeniem.
+    \item Urządzenie jest gotowe do działania.
+\end{enumerate}
+\chapter{Oprogramowanie}
+
+\chapter{Identyfikacja}
+\chapter{Regulacja układu}
+\chapter{Podsumowanie}
+
+
+
+\addcontentsline{toc}{chapter}{\bibname}
+\begin{thebibliography} 
+\\
+\bibitem{Filin},,Termoelektryczne urządzenia chłodnicze’’, Sergiey Filin
+\bibitem{KK} https://elportal.pl/pdf/k01/20\_05.pdf
+\end{thebibliography}
+
+%opcjonalnie moÄšĹşe siĂÂ tu pojawiĂÂ spis rysunkÄĹw i tabel
+% \listoffigures
+% \listoftables
+\end{document}
+
