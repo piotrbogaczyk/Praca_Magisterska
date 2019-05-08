@@ -7,6 +7,7 @@
 \usepackage{textcomp}
 \usepackage{gensymb}
 \usepackage{color}
+\usepackage[table]{xcolor}
 
 %pakiety do grafiki
 \usepackage{graphicx}
@@ -220,10 +221,21 @@ Najczęściej moduły Peltiera stosuje się:
 
 Niezwykle ważnym zastosowaniem ogniw Peltiera jest również zastosowanie ich do produkcji prądu elektrycznego korzystając z zjawiska Seebecka. Ciekawostką jest fakt ,że niektóre bezzałogowe statki kosmiczne (w tym łazik Curiosity Mars) wykorzystują radioizotopowe generatory termoelektryczne (RTG), które przekształcają energię cieplną w energię elektryczną za pomocą efektu Seebecka. Urządzenia mogą przetrwać kilka dziesięcioleci, ponieważ są napędzane przez rozpad wysokoenergetycznych materiałów radioaktywnych.
 
+\chapter{Oprogramowanie}
+\section{LOGO! SoftComfort}
+Pakiet LOGO! SoftComfort pozwala na wygodne programowanie w jednym środowisku programistycznym sterowników serii: LOGO! oraz współpracujących z nimi paneli operatorskich i innych urządzeń producenta. Pakiet oprogramowania zawiera wiele udogodnień i rozwiązań ułatwiających pracę z sterownikami. Miedzy innymi posiada przejrzysty interfejs graficzny pozwalający na pracę bez konieczności posługiwania się samym urządzeniem LOGO!. W pracy w celu stworzenia programu posłużono się schematem drabinkowym(Ladder Diagram) jednakże program pozwala również na programowanie przy pomocy bloków funkcjonalnych.
+
+Dodatkowym udogodnieniem jest możliwość symulacji działania całego układu w komputerze PC. Program również można testować online co daje możliwość podejrzenia zmian stanów wejść i wyjść cyfrowych oraz zmiennych procesowych w trybie sterownika "RUN". Przenoszenie napisanego programu z komputera PC do sterownika PLC i odwrotnie odbywa się przy pomocy przewodu Ethernet.
+
+\section{Baza danych pomiarowych}
+Wykorzystanie pakietu Microsoft Office a konkretnie programu Excel pozwala na utworzenie prostej bazy danych. Program Excel do poprawnej pracy z sterownikiem PLC wymaga pobrania narzędzia LOGO!AccessTool dostępnego na stronie Siemensa. Następnie należy zaimportować dodatek LOGO!AccessTool do programu Excel i go skonfigurować miedzy innymi określić w jakich odstępach czasowych dane mają być pobierane z sterownika.  Poprawna instalacja i konfiguracja narzędzia pozwala na odczyt i zapis danych z czujników pomiarowych w czasie rzeczywistym. 
+
+Dzięki pakietowi office jest możliwa również dalsza interpretacja zebranych pomiarów. Program Excel daje możliwość utworzenia tabel czy wykresów. Analiza i badanie zebranych danych pomiarowych z obiektu jest przedstawiona w dalszej części pracy.
+
 \chapter{Realizacja stacji badawczej z komorą termiczną}
 \section{Opis obiektu}
 
-W celu zrealizowania systemu pozwalającego na badanie i regulacje temperatury z wykorzystaniem ogniw Peltiera został zbudowany obiekt badawczy. Urządzenie składa się z stelażu wykonanego z profili aluminiowych na którym zostały osadzone urządzenia sterujące, pomiarowe oraz wykonawcze. Dodatkowo została wykonana komora z każdej strony ogrodzona przez pleksi która pozwala utrzymać wewnątrz określoną temperaturę. Istnieje możliwość wyjęcia całego systemu chłodzącego w skład którego wchodzi ogniwo wraz z radiatorami i wentylatorami. Aby tego dokonać należy odłączyć złącze, odkręcić śrubki motylkowe i delikatnie wysunąć górną część komory wraz z wszystkimi elementami wykonawczymi. Zabieg ten może zostać wykonany w wypadku konieczności konserwacji urządzenia bądź wyczyszczenia komory chłodzącej. Dodatkowo temperatura wewnątrz komory badawczej może być zakłócana poprzez zastosowanie czterech sterowanych analogowo rezystorów wysokich mocy. Każdy z rezystorów charakteryzuje się mocą 50W. Urządzenie pozwala na mocą grzewczą rezystorów w zakresie 0-100\%.
+W celu zrealizowania systemu pozwalającego na badanie i regulacje temperatury z wykorzystaniem ogniw Peltiera został zbudowany obiekt badawczy. Urządzenie składa się z stelażu wykonanego z profili aluminiowych na którym zostały osadzone urządzenia sterujące, pomiarowe oraz wykonawcze. Dodatkowo została wykonana komora z każdej strony ogrodzona przez pleksi która pozwala utrzymać wewnątrz określoną temperaturę. Istnieje możliwość wyjęcia całego systemu chłodzącego w skład którego wchodzi ogniwo wraz z radiatorami i wentylatorami. Aby tego dokonać należy odłączyć złącze, odkręcić śrubki motylkowe i delikatnie wysunąć górną część komory wraz z wszystkimi elementami wykonawczymi. Zabieg ten może zostać wykonany w wypadku konieczności konserwacji urządzenia bądź wyczyszczenia komory chłodzącej. Dodatkowo temperatura wewnątrz komory badawczej może być zakłócana poprzez zastosowanie czterech sterowanych analogowo rezystorów wysokich mocy. Każdy z rezystorów charakteryzuje się mocą 50W. Urządzenie pozwala na mocą grzewczą rezystorów w zakresie 0-100\%. Zasilanie wszystkich urządzeń realizowane jest przy pomocy zasilacza 24 V.
 
 Elementami pomiarowymi które są odpowiedzialne za mierzenie temperatury  w czasie rzeczywistym są trzy termopary ($T_1, T_2, T_3$) które zostały zainstalowane bezpośrednio przy stronie gorącej oraz zimnej modułu jak i wewnątrz komory termicznej. Takie rozwiązanie pozwala na zmierzenie różnicy temperatur po stronie gorącej i chłodnej ogniwa oraz wewnątrz zbudowanej komory termicznej. Dodatkowo w celu odprowadzania z ogniwa ciepła oraz zimna w układzie zastosowane zostały radiatory które wspomagane są przez wentylatory obrotowe. Takie rozwiązanie pozwala na efektyne chłodzenie ogniwa w trakcie pracy z maksymalnym obciążeniem cieplnym.
 
@@ -231,41 +243,98 @@ W celu sterowania temperaturą wewnątrz komory termicznej został zastosowany s
 
 Wszystkie przewody sygnałowe oraz sterujące zastosowane w obiekcie zostały poprowadzone w zębatych listwach prowadzących. Wszystkie elementy sterujące jak i zasilające zostały osadzone na listwach przemysłowych. Panel operatorki oraz panel sterujący zadajnika prądowego został osadzony w pleksi. Zastosowanie takich rozwiązań pozwoliło zachować należytą estetykę układu i poprawić jego przejżystość(rys. 3.1).
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{obiekt_front.jpg}
-    \includegraphics[width=\textwidth]{obiekt_front.jpg}
+    \includegraphics[width=\textwidth]{obiekt_back.jpg}
     \caption{Schemat ideowy urządzenia}
 \end{figure}
 
 \section{Wykaz elementów}
 Poniżej zostały przedstawione kolejno urządzenia odpowiedzialne za sterowanie układem, urządzenia wykonawcze oraz urządzenia pomiarowe. Przedstawione również zostały sygnały które każde z urządzeń odbiera i generuje wraz z krótkim ich opisem.
 \subsection{Urządzenia sterujące}
-Do urządzeń sterujących układem zaliczany jest sterownik PLC: LOGO!8 wraz z modułem analogowym oraz zadajnik prądowy typu: pozwalający manualnie ustawić napięcie i natężenie prądu płynącego przez badane ogniwo termoelektryczne.
-\newline
+Do urządzeń sterujących układem zaliczany jest sterownik PLC: LOGO!8 wraz z modułem analogowym oraz przetwornica napięcia typu: DPS5015 pozwalająca manualnie ustawić napięcie i natężenie prądu płynącego przez badane ogniwo termoelektryczne. Dodatkowo w układzie zastosowany został panel operatorski LOGO! TDE pozwalający na odczytywanie bieżących pomiarów temperatury. Panel umożliwia również sterowanie układem w trybie manualnm.
 
-\begin{center}
-\begin{tabular}{|c|c|c|c|c|c|}
+\subsubsection{LOGO! 0BA8 (LOGO! 12/24RCE)}
+LOGO! jest uniwersalnym modułem logicznym firmy Siemens który pozwala na zintegrowanie sterowania wraz z zasilaniem oraz interfejsem modułów rozszerzeń. Również istnieje możliwość podłączenia opcjonalnego modułu wyświetlania tekstu(TDE).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Sterownik_LOGO!.PNG}
+    \caption{Sterownik LOGO! 0BA8 (LOGO! 12/24RCE)[3]}
+\end{figure}
+
+\subsubsection{LOGO! AM2 AQ (0/4\dots20 mA or 0 \dots 10 VDC)}
+LOGO! AM2 AQ jest modułem analogowym zasilanym przez 24V DC. Posiada dwa wyjścia analogowe 4-20ma lub 0-10 VDC. W pracy moduł został wykorzystany do regulacji mocy rezystorów wewnątrz komory termicznej oraz regulacji prądu przepływającego przez ogniwo Peltira.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Modul_analogowy.PNG}
+    \caption{Moduł analogowy LOGO! AM2 AQ (0/4\dots20 mA or 0 \dots 10 VDC)[3]}
+\end{figure}
+
+\subsubsection{Panel operatorski LOGO! TDE}
+
+Użycie zintegrowanego z sterownikiem panelu operatorskiego LOGO! TDE pozwala na intuicyjne sterowanie całym układem. Sterowanie odbywa się przy pomocy czterech pulpitów operatorskich wykonanych w programie LOGO! SoftComfort. Panel operatorski składa się z czterech przycisków funkcyjnych, przycisku "ESC" oraz "ENTER" oraz czterech strzałek kierunkowych.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{HMI.PNG}
+    \caption{Panel operatorski LOGO! TDE [3]}
+\end{figure}
+
+
+\subsubsection{Przetwornica napięcia 0-50V 750W DPS5015}
+
+Zasilacz DPS5015 oferuje bardzo wysoką precyzję i dokładność. Regulowane wyjście osiąga do 50V natężenia lub 15A napięcia i może być skonfigurowane w precyzyjnych krokach co 10mV lub 1mA. Zasilacz dodatkowo jest wyposażony w pamięć parametrów awaryjnego wyłączenia oraz programowalną pamięć danych. Urządzenie charakteryzuje się prostą obsługą, kolorowy wyświetlacz dostarcza prostych informacji między innymi mogą to być aktualne watości napięcia i natężenia prądu wraz z mocą wyjściową[4].
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Przetwornica_napiecia.PNG}
+    \caption{Przetwornica napięcia 0-50V 750W DPS5015[4]}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|c|c|c|c|c|X|}
 \hline
-    Lp. & \multicolumn{2}{|c|}{Urządzenie} & Typ & Sygnał & Opis \\\hline
-\end{tabular}
-\end{center}
-
+\rowcolor{lightgray}
+    Lp. & \multicolumn{2}{|c|}{Urządzenie}        & Sygnał    & Typ         & Opis                              \\\hline
+    1.  &  LOGO! 0BA8       & Sterownik PLC       & R\_1\_AO  & AO          & Sygnał sterujący \newline rezystorem nr. 1 \\\hline
+    2.  &  LOGO! 0BA8       & Sterownik PLC       & R\_2\_AO  & AO          & Sygnał sterujący \newline rezystorem nr. 2 \\\hline
+    3.  &  LOGO! 0BA8       & Sterownik PLC       & R\_3\_AO  & AO          & Sygnał sterujący \newline rezystorem nr. 3 \\\hline
+    4.  &  LOGO! 0BA8       & Sterownik PLC       & R\_4\_AO  & AO          & Sygnał sterujący \newline rezystorem nr. 4 \\\hline
+    5.  &  LOGO! 0BA8       & Sterownik PLC       & T1\_AI    & AI          & Pomiar temperatury T1(0\dots10V)           \\\hline
+    6.  &  LOGO! 0BA8       & Sterownik PLC       & T2\_AI    & AI          & Pomiar temperatury T2(0\dots10V)           \\\hline
+    7.  &  LOGO! 0BA8       & Sterownik PLC       & T3\_AI    & AI          & Pomiar temperatury T3(0\dots10V)           \\\hline
+    8.  &  LOGO! AM2 AQ     & Moduł analogowy     & WZR       & AO          & Sygnał sterujący mocą rezystorów           \\\hline
+    9.  &  LOGO! AM2 AQ     & Moduł analogowy     & WZP       & AO          & Sygnał sterujący mocą ogniwa Peltiera      \\\hline
+\end{tabularx}
+   \caption{Spis urządzeń sterujących}
+\end{table}
 
 \subsection{Urządzenia wykonawcze}
+
+\begin{table}[h]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
     Lp. & \multicolumn{2}{|c|}{Urządzenie} & Typ & Sygnał & Opis \\\hline
 \end{tabular}
+   \caption{Spis urządzeń wykonawczych}
 \end{center}
+\end{table}
 \subsection{Urządzenia pomiarowe}
+
+\begin{table}[h]
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
     Lp. & \multicolumn{2}{|c|}{Urządzenie} & Typ & Sygnał & Opis \\\hline
 \end{tabular}
+   \caption{Spis urządzeń pomiarowych}
 \end{center}
+\end{table}
 \section{Uruchomienie i obsługa urządzenia}
 Poniżej został przedstawiony schemat postępowania w celu uruchomienia urządzenia:
 \begin{enumerate}
@@ -275,7 +344,6 @@ Poniżej został przedstawiony schemat postępowania w celu uruchomienia urządz
     \item Uruchomić specjalistyczne oprogramowanie i połączyć się z urządzeniem.
     \item Urządzenie jest gotowe do działania.
 \end{enumerate}
-\chapter{Oprogramowanie}
 
 \chapter{Identyfikacja}
 \chapter{Regulacja układu}
@@ -287,11 +355,14 @@ Poniżej został przedstawiony schemat postępowania w celu uruchomienia urządz
 \begin{thebibliography} 
 \\
 \bibitem{Filin},,Termoelektryczne urządzenia chłodnicze’’, Sergiey Filin
-\bibitem{KK} https://elportal.pl/pdf/k01/20\_05.pdf
+\bibitem{KK}https://elportal.pl/pdf/k01/20\_05.pdf
+\bibitem{LOGO}https://www.automatyka.siemens.pl/docs/docs\_ia/Podrecznik\_Siemens\_LOGO8\_PL.pdf
+\bibitem{Zadajnik}http://anleitung.joy-it.net/wp-content/uploads/2018/09/JT-DPS5015-Manual-1.pdf
+\bibitem{LOGO!}Siemens LOGO! Manual, 11/2017 [numer: A5E33039675 - AE]
 \end{thebibliography}
 
 %opcjonalnie moÄšĹşe siĂÂ tu pojawiĂÂ spis rysunkÄĹw i tabel
-% \listoffigures
-% \listoftables
+\listoffigures
+\listoftables
 \end{document}
 
