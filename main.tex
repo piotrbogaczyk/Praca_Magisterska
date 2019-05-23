@@ -291,7 +291,7 @@ Użycie zintegrowanego z sterownikiem panelu operatorskiego LOGO! TDE pozwala na
 
 \subsubsection{Przetwornica napięcia 0-50V 750W DPS5015}
 
-Zasilacz DPS5015 oferuje bardzo wysoką precyzję i dokładność. Regulowane wyjście osiąga do 50V natężenia lub 15A napięcia i może być skonfigurowane w precyzyjnych krokach co 10mV lub 1mA. Zasilacz dodatkowo jest wyposażony w pamięć parametrów awaryjnego wyłączenia oraz programowalną pamięć danych. Urządzenie charakteryzuje się prostą obsługą, kolorowy wyświetlacz dostarcza prostych informacji między innymi mogą to być aktualne watości napięcia i natężenia prądu wraz z mocą wyjściową[4].
+Zasilacz DPS5015 oferuje bardzo wysoką precyzję i dokładność. Regulowane wyjście osiąga do 50V natężenia lub 15A napięcia i może być skonfigurowane w precyzyjnych krokach co 10mV lub 1mA. Zasilacz dodatkowo jest wyposażony w pamięć parametrów awaryjnego wyłączenia oraz programowalną pamięć danych. Urządzenie charakteryzuje się prostą obsługą, kolorowy wyświetlacz dostarcza prostych informacji między innymi mogą to być aktualne wartości napięcia i natężenia prądu wraz z mocą wyjściową[4].
 
 \begin{figure}
     \centering
@@ -306,13 +306,13 @@ Wzmacniacze wykorzystane w układzie służą do regulacji natężenia prądu p�
 
 Do grupy urządzeń wykonawczych wykorzystanych w projekcie które wpływają na temperaturę w komorze termicznej możemy zaliczyć: ogniwo Peltiera, przekaźniki, rezystory oraz radiatory wspomagane przez wentylatory. Dodatkowo w tej części zostały opisane elementy zasilające układ wraz z zastosowanymi urządzeniami bezpieczeństwa.
 \subsubsection{Ogniwo Peltiera}
-W układzie zastosowane zostało ogniwo Peltiera typu TEC1-12715. Nominalna wartość napięcia zasilania wybranego ogniwa wynosi 12 V(dopuszcza się napięcie do 15,5 V). Maksymalny pobór prądu wynosi natomiast 11.8 A co pozwala na pracę ogniwa z maksymalną odprowadzaną mocą do 142W. Ogniwo chrakteryzuje się opornością od 0,8\ohm do 0,9\ohm.
+W układzie zastosowane zostało ogniwo Peltiera typu TEC1-12715. Nominalna wartość napięcia zasilania wybranego ogniwa wynosi 12 V(dopuszcza się napięcie do 15,5 V). Maksymalny pobór prądu wynosi natomiast 11.8 A co pozwala na pracę ogniwa z maksymalną odprowadzaną mocą do 142W. Ogniwo charakteryzuje się opornością od 0,8\ohm do 0,9\ohm.
 \subsubsection{Przekaźniki}
-W pracy zostały użyte dwa przekaźniki RMP84 osadzone w gniazdach typu GZMB80. Pierwszy z nich został wykorzystany do przełączania kierunku przepływu prądu przez ogniwo Peltiera a tym samym zmianę polaryzacji na nim. Pozwala to na zmiany pracy ogniwa(grzanie, chłodzenie) i nie dopuszcza do jednoczesnego grzania i chłodzenia ogniwem. Drugi przekaźnik pozwala na zmianę trybów pracy układu z ręcznego na automatyczny. Przekaźnik zapobiega również włączeniu dwóch trybów pracy jednocześnie i poboru prądu przez ogniwo jednocześnie z sterownika i zadajnika prądowego. Wybrano gniazda przekaźnikowe wyposażone w diody które zapobiegają "cofaniu" się prądu z układu na sterownik w momencie gdy np. układ zostanie wyłączony a temperatury strony zimnej i ciepłej ogniwa będą znacznie się różnić. W takim wypadku diody powodują rozproszenie się prądu.
+W pracy zostały użyte dwa przekaźniki RMP84 osadzone w gniazdach typu GZMB80. Pierwszy z nich został wykorzystany do przełączania kierunku przepływu prądu przez ogniwo Peltiera a tym samym zmianę polaryzacji na nim. Pozwala to na zmiany pracy ogniwa(grzanie, chłodzenie). Drugi przekaźnik pozwala na zmianę trybów pracy układu z ręcznego na automatyczny. Przekaźnik zapobiega również włączeniu dwóch trybów pracy jednocześnie i poboru prądu przez ogniwo jednocześnie z sterownika i zadajnika prądowego. Wybrano gniazda przekaźnikowe wyposażone w diody które zapobiegają "cofaniu" się prądu z układu na sterownik w momencie gdy np. układ zostanie wyłączony a temperatury strony zimnej i ciepłej ogniwa będą znacznie się różnić. W takim wypadku diody powodują rozproszenie się prądu.
 \subsubsection{Wentylatory}
 W układzie zastosowane zostały dwa wentylatory firmy Saunon. Większy do wspomagania odprowadzania ciepła z radiatora strony ciepłej układu oraz mniejszy do strony zimnej układu. Oba wentylatory zasilane są przy pomocy dwóch przewodów napięciem 24V i generują 34 dBA hałasu. Większy wentylator pracuje z prędkością obrotową wynoszącą 2200 RPM co pozwala na przetłaczanie 127.3 $m^3/h$ powietrza. Mniejszy natomiast wspomagający odprowadzenie zimnego powietrza z ogniwa oraz rozprowadzenie go po komorze termicznej pracuje z prędkością obrotową wynoszącą 3000 RPM i wydajnością wynoszącą 87.4 $m^3/h$.
 \subsubsection{Radiatory}
-Do odprowadzenia ciepła ze strony grzejącej ogniwa oraz zimna ze strony chłodnej wykorzystano dwa żeberkowe radiatory wykonane z aluminium. Do odprowadzania ciepła ze strony gorącej ogniwa wykorzystano radiator SilentiumPC Fera 3. Radiator został wykonany z wykorzystaniem technologi HE (High Efficiency) wyposażony jest w cztery rurki cieplne które dotykają bezpośrednio modułu i tym samym poprawiają odprowadzanie ciepła zapewniając niższe temperatury.
+Do odprowadzenia ciepła ze strony grzejącej ogniwa oraz zimna ze strony chłodnej wykorzystano dwa żeberkowe radiatory wykonane z aluminium. Do odprowadzania ciepła ze strony gorącej ogniwa wykorzystano radiator SilentiumPC Fera 3. Radiator został wykonany z wykorzystaniem technologi HE (High Efficiency) wyposażony jest w cztery rurki cieplne które dotykają bezpośrednio modułu i tym samym poprawiają odprowadzanie ciepła zapewniając niższe temperatury. Wykorzystany radiator pozwala na odprowadzenie 180W mocy cieplnej co w zupełności wystarcza dla zastosowanego ogniwa Peltiera. Do rozprowadzania chłodu wewnątrz komory termicznej użyto prostego radiatora żeberkowanego. 
 \subsubsection{Rezystory}
 W celu wprowadzenia zakłóceń do układu w komorze termicznej zostały zamontowane cztery przykręcane rezystory drutowe zintegrowane z radiatorami. Każdy charakteryzuje się mocą 50W i opornością 20\ohm. Wszystkie rezystory zostały połączone równolegle i w pracy traktowane są jako jedno źródło ciepła. Regulacji temperatury na rezystorach dokonuje się manualnie przy użyciu panelu operatorskiego TDE lub automatycznie przy pomocy sterownika PLC.
 \subsubsection{Zasilanie}
@@ -331,10 +331,9 @@ W zbudowanym urządzeniu zostały wykorzystane trzy układy pomiaru temperatury 
     \item T2 - Czujnik umieszczony bezpośrednio nad ogniwem Peltiera pozwalający na pomiar temperatury gorącej strony ogniwa. Zakres mierzonych temperatur wynosi 20\dots120 stopni C.
     \item T3 - Czujnik umieszczony wewnątrz komory termicznej. Zakres mierzonych temperatur wynosi 0\dots50 stopni C.
 \end{itemize}
-
 Wszystkie układu pomiarowe zasilane są napięciem 24V z sterownika PLC.
-
-\begin{table}
+\newpage
+\begin{table}[h!]
 \footnotesize
 \begin{tabularx}{\textwidth}{|c|X|X|c|c|}
 \hline
@@ -388,6 +387,7 @@ Wszystkie układu pomiarowe zasilane są napięciem 24V z sterownika PLC.
 \end{table}
 
 \section{Uruchomienie i obsługa urządzenia}
+\subsection{Uruchomienie urządzenia}
 Poniżej został przedstawiony schemat postępowania w celu uruchomienia urządzenia:
 \begin{enumerate}
     \item Podłączenie obiektu do źródła prądu przemiennego 230V przy pomocy przewodu zasilającego.
@@ -396,6 +396,27 @@ Poniżej został przedstawiony schemat postępowania w celu uruchomienia urządz
     \item Uruchomić specjalistyczne oprogramowanie i połączyć się z urządzeniem.0
     \item Urządzenie jest gotowe do działania.
 \end{enumerate}
+
+\subsection{Obsługa programowalnego modułu zasilania}
+\subsubsection{Ekran główny}
+Po włączeniu zasilania na wyświetlaczu urządzenia można zauważyć okno powitalne następnie moduł zasilający przechodzi do głównego okna. Główne okno zawiera podstawowe informacje takie jak: natężenie wyjściowe, napięcie wyjściowe oraz moc. Nad podstawowymi informacjami znajduje się ustawione napięcie oraz natężenie prądu. Istnieje możliwość zmiany tych wartości poprzez wciśnięcie przycisku $M1$ w przypadku zmiany napięcia i $M2$ w przypadku zmiany natężenia prądu. Można zwiększać wartości poruszając potencjometrem zgodnie z wskazówkami zegara i zmniejszać obracając go w drugą stronę. Ponowne wciskanie potencjometru pozwala na zmianę dokładności ustawianych wartości kolejno do wartości dziesiętnych i setnych. Akceptacji ustawionych wartości dokonuje się przez ponowne naciśnięcie przycisku $M1$ w przypadku zmiany napięcia i $M2$ w przypadku zmiany natężenia prądu. Informacja o napięciu jakie jest podawane na wejście urządzenia znajduje się u dołu ekranu. Po prawej stronie ekranu znajdują się ikony stanu pracy, ikona blokady klawiszy, ikona stanu nieprawidłowego wyjścia, wskaźnik stanu pracy CV(stabilizacja napięcia) lub CC(stabilizacja prądu) oraz ikona wyjścia włączone/wyłączone. Włączenie i wyłączenie urządzenia następuje po wciśnięciu przycisku $ON/OFF$.
+
+\textbf{UWAGA!} Należy pamiętać o włączeniu funkcji sterowania ręcznego w celu ustawiania napięcia oraz natężenia prądu dla ogniwa peltiera przy pomocy zadajnika prądowego.
+\subsubsection{Zmiana napięcia i natężenia prądu wyjściowego}
+Aby dokonać zmiany napięcia lub natężenia prądu należy przycisnąć przycisk $SET$. Po wciśnięciu przycisku następuje przejście do ekranu zmiany danych. Następnie przy pomocy przycisków $M1$ oraz $M2$ wybieramy parametr do zmiany:
+\begin{itemize}
+    \item U-SET - napięcie prądu wyjściowego,
+    \item I-SET - natężenie prądu wyjściowego,
+    \item S-OVP - górna granica napięcia na wyjściu,
+    \item S-OCP - górna granica wartości natężenia na wyjściu,
+    \item S-OPP - górna granica wartości mocy na wyjściu,
+    \item B-LED - ustawienie jasności wyświetlacza,
+    \item M-PRE - ustawienie komórki pamięci(10 możliwości).
+\end{itemize}
+Po wybraniu parametru do zmiany należy nacisnąć pokrętło potencjometru. Po wciśnięciu pokrętła zostaje podświetlona wartość która podlega zmianie. Obracając pokrętło potencjometru zgodnie z wskazówkami zegara powodujemy zwiększenie wartości zmienianej, w przeciwną stronę powodujemy jej obniżenie. Kolejne przyciśnięcia pokrętła pozwalają na zmianę dokładności ustawianej wartości kolejno o liczby dziesiętne i setne. Aby zaakceptować wybraną wartość należy wcisnąć przycisk $SET$ bądź poczekać 1min. Po tym czasie wartość zostanie automatcznie zapisana.
+\subsubsection{Zapisywanie grupy ustawionych danych}
+Istnieje możliwość zapisania w pamięci urządzenia grupy ustawionych danych. Aby tego dokonać należy po wciśnięciu przycisku $SET$ w ekranie głównym przejść do pozycji $M-PRE$. Następnie należy wcisnąć pokrętło potencjometru i obracając nim wybrać wolny slot pamięci $M0\dots M9$. Po wybraniu wolnego slotu należy ponownie wcisnąć potencjometr i ustawić wartość $ON$.
+
 
 \chapter{Badanie i identyfikacja ogniwa Peltiera}
 \section{Badanie parametru $Q_{\max}$}
