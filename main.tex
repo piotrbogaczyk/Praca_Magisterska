@@ -406,7 +406,7 @@ Po wybraniu parametru do zmiany należy nacisnąć pokrętło potencjometru. Po 
 \subsubsection{Zapisywanie grupy ustawionych danych}
 Istnieje możliwość zapisania w pamięci urządzenia grupy ustawionych danych. Aby tego dokonać należy po wciśnięciu przycisku $SET$ w ekranie głównym przejść do pozycji $M-PRE$. Następnie należy wcisnąć pokrętło potencjometru i obracając nim wybrać wolny slot pamięci $M0\dots M9$. Po wybraniu wolnego slotu należy ponownie wcisnąć potencjometr i ustawić wartość $ON$.
 
-\chapter{Oprogramowanie}
+\chapter{Oprogramowanie i ogsługa urządzenia }
 \section{LOGO! SoftComfort}
 Pakiet LOGO! SoftComfort pozwala na wygodne programowanie w jednym środowisku programistycznym sterowników serii: LOGO! oraz współpracujących z nimi paneli operatorskich i innych urządzeń producenta. Pakiet oprogramowania zawiera wiele udogodnień i rozwiązań ułatwiających pracę z sterownikami. Między innymi posiada przejrzysty interfejs graficzny pozwalający na pracę bez konieczności posługiwania się samym urządzeniem LOGO!. Program napisano przy pomocy bloków funkcjonalnych (Function Block) jednakże LOGO! SoftComfort pozwala również na programowanie języku drabinkowym.
 
@@ -416,6 +416,109 @@ Dodatkowym udogodnieniem jest możliwość symulacji działania całego układu 
 Wykorzystanie pakietu Microsoft Office a konkretnie programu Excel pozwala na utworzenie prostej bazy danych. Program Excel do poprawnej pracy z sterownikiem PLC wymaga pobrania narzędzia LOGO!AccessTool dostępnego na stronie Siemensa. Następnie należy zaimportować dodatek LOGO!AccessTool do programu Excel i go skonfigurować miedzy innymi określić w jakich odstępach czasowych dane mają być pobierane z sterownika.  Poprawna instalacja i konfiguracja narzędzia pozwala na odczyt i zapis danych z czujników pomiarowych w czasie rzeczywistym. 
 
 Dzięki pakietowi office jest możliwa również dalsza interpretacja zebranych pomiarów. Program Excel daje możliwość utworzenia tabel czy wykresów. Analiza i badanie zebranych danych pomiarowych z obiektu jest przedstawiona w dalszej części pracy.
+
+\section{Obsługa urządzenia z wykorzystaniem panelu operatorskiego LOGO TDE}
+W układzie zastosowany został panel operatorski LOGO! TDE pozwalający na intuicyją obsługę zbudowanego urządzenia. Sterowanie układem odbywa się przy pomocy czterech zaprogramowanych klawiszy funkcyjnych $F1 \dots F4$. Po uruchomieniu urządzenia na panelu operatorskim pojawia się ekran zawierający podstawowe informacje o stanie temperaturowym komory termicznej oraz bloków aluminiowych umieszczonych nad i pod modułem termoelektrycznym.
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Ekran1.jpg}
+    \caption{Ekran startowy LOGO! TDE}
+    \end{figure}
+\end{center}
+Na ekranie startowym zaprogramowane zostło wyświetlanie:
+\begin{itemize}
+    \item BOX - temperatura wewnątrz komory termicznej,
+    \item HOT - temperatura wewnątrz bloku aluminiowego po stronie grzejącej modułu,
+    \item COLD - temperatura wewnątrz bloku aluminiowego po stronie chłodzącej modułu,
+    \item REZ - moc rezystorów(źródła ciepła) 0-100\%,
+    \item PELT - moc podawana na ogniwo 0-100\%.
+\end{itemize}
+Ekran główny wyświetla również cztery podstawowe informacje o statusie urządzenia odpowiednio:
+\begin{itemize}
+    \item C - informacja o sposobie sterowania komorą chłodniczą (PLC/LOCAL),
+    \item F - funkcja modułu Peltiera (COOL/HEAT),
+    \item C - informacja o stanie wentylatora strony zimnej (ON/OFF),
+    \item H - informacja o stanie wentylatora strony gorącej (ON/OFF).
+\end{itemize}
+Pierwszy ekran pozwala również na podjęcie akcji po wciśnięciu przyciku F1, F3 lub F4:
+\begin{itemize}
+    \item F1 - przejście do kolejnego ekranu,
+    \item F3 - Przełączanie trybu (PLC/LOCAL),
+    \item F4 - Przełączanie funkcji modułu Peltiera (COOL/HEAT).
+\end{itemize}
+Po wciśnięcu przycisku F1 ekran zostaje przełączony na drugi pozwalający na włączenie i wyłączenie wentylatorów strony zimnej i gorącej.
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Ekran2.jpg}
+    \caption{Ekran pozwalający na sterowanie wentylatorami}
+    \end{figure}
+\end{center}
+Wszystkie informacje przedstawione w nebu drugim są analogiczne do ekranu początkowego jednak istnieje możliwość wykonania innych akcji:
+\begin{itemize}
+    \item F3 - Pozwala na włączenie wentylatora strony chłodnej,
+    \item F4 - Pozwala na włączenie wentylatora strony gorącej.
+\end{itemize}
+Po ponownym naciśnięciu przycisku F1 przenosimy się do menu pozwalającego na sterowanie mocą zastosowanych rezystorów.
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Ekran3.jpg}
+    \caption{Ekran pozwalający na sterowanie rezystorami}
+    \end{figure}
+\end{center}
+Sterowanie źródłem ciepła odbywa się przy pomocy przycisków F3 i F4 odpwiedzialnych odpowiednio za zwiększenie i zmniejszenie mocy rezystorów w granicach 0-100\%.
+\newpage
+Kolejnym ekranem jest menu pozwalające na sterownie regulatorem PI. Pozwala ono na wybranie tryby automatycznego bądź manualnego przy pomocy przycisku F2. Również możliwe jest uztawienie wartości zadanej(SP) w przypadku sterowania automatycznego oraz mocy regulatora w granicach 0-100\% w trybie manualnym.
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Ekran4.jpg}
+    \caption{Ekran regulatora PI}
+    \end{figure}
+\end{center}
+Po wciśnięciu przycisku F1 przechodzimy do następnego ekranu menu który pozwala na obsługę regulacji dwupołożeniowej. Przycisk F2 powoduje włączanie i wyłączanie regulacji natomiast przyciski F3 i F4 służą do ustawienia wartości zadanej.
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Ekran5.jpg}
+    \caption{Ekran regulatora dwupołożeniowego}
+    \end{figure}
+\end{center}
+Kolejne ekrany są rozszerzeniem menu regulatora dwupołorzeniowego i pozwalają na dobór wartości mocy regulatora w zależności od uchybu regulacji. Zaprogramowano możliwość ustawienia wartości charakterystycznych regulatora dwupołożeniowego zarówno dla funkcji chłodzenia jak i grzania modułem Peltiera. Dodatkowo zaprogramowano możliwość dodania kolejnej wartości nastawczej pozwalając na zmianę regulatora z dwupołożeniowego na trójstawny.
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.40\textwidth]{Ekran60.jpg}
+    \includegraphics[width=0.40\textwidth]{Ekran61.jpg}
+    \caption{Ekran regulatora dwupołożeniowego ustawianie wartości dla chłodzenia}
+    \end{figure}
+\end{center}
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.40\textwidth]{Ekran62.jpg}
+    \includegraphics[width=0.40\textwidth]{Ekran63.jpg}
+    \caption{Ekran regulatora dwupołożeniowego ustawianie wartości dla chłodzenia}
+    \end{figure}
+\end{center}
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.40\textwidth]{Ekran70.jpg}
+    \includegraphics[width=0.40\textwidth]{Ekran71.jpg}
+    \caption{Ekran regulatora dwupołożeniowego ustawianie wartości dla grzania}
+    \end{figure}
+\end{center}
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.40\textwidth]{Ekran72.jpg}
+    \includegraphics[width=0.40\textwidth]{Ekran73.jpg}
+    \caption{Ekran regulatora dwupołożeniowego ustawianie wartości dla grzania}
+    \end{figure}
+\end{center}
 
 \chapter{Badanie ogniwa Peltiera}
 
@@ -615,7 +718,16 @@ gdzie: \\
 E - wartość zmierzona przez czujnik temperatury, \\
 SP - zadana temperatura. \\
 
-Przebieg zmiany temperatury w czasie w komorze termicznej przy wykorzystaniu do kontroli temperatury regulatora dwupołorzeniowego został przedstawiony na rysunku
+Przebieg zmiany temperatury w czasie w komorze termicznej przy wykorzystaniu do kontroli temperatury regulatora dwupołorzeniowego został przedstawiony na rysunku 6.1.
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Dwupolozeniowy.png}
+    \caption{Regulacja temperatury przy pomocy regulatora dwupołożeniowego}
+    \end{figure}
+\end{center}
+Na podstawie uzyskanej charakterystyki przebiegu temperatury w czasie można wywnioskować, że zastosowanie regulatora dwópołożeniowego pozwala na najszybsze osiągnięcie zadanej temperatury. Spowodowane jest to działaniem modułu Peltiera z 100\% wydajnością chłodniczą od momentu rozpoczęcia regulacji aż do osiągnięcia zadanej wartości. Można zauważyć również w tym typie regulacji oscylacje powstałe po osiągnięciu zadanej temperatury co jest zgodne z przypuszczeniami.
+
 
 \section{Regulator typu PI}
 Regulacja typu PI jest odmianą klasycznego sterowania PID wykorzystującą wyłącznie człon proporcjonalny i całkujący regulatora PID do kontroli regulowanego układu. W praktyce do regulacji układów wolnozmiennych najczęściej używa się regulatorów typu PI z uwagi na wolne zmiany regulowanych wartości. Wartość wyjściowa czujnika temperatury jest wprowadzana do bloczka regulatora jako zmienna wejściowa[22]:
@@ -722,12 +834,37 @@ Na podstawie nastaw obliczonych tak aby zminimalizować błąd kwadratu całki u
     \caption{Przebieg temperatury w komorze chłodniczej dla Kp = 22 i Ti = ,435s}
     \end{figure}
 \end{center}
-
+\newpage
 \section{Dodanie zakłóceń do układu regulacji}
-W celu wprowadzenia do badanego układu zakłóceń zostały wprowadzone rezystory wysokich mocy. Rezystory pełnią funkcję źródła ciepła i powodują nagrzewanie się komory termicznej. Aby sprawdzić działanie regulatorów w trakcie wystąpienia zakłóceń w momencie ustabilizowania się układu regulacji włączono źródło ciepła na 100\% mocy na czas pięciu minut. Na podstawie zebranych danych pomiarowych z czujnika temperatury wewnątrz komory termicznej wykreślono przebiegi temperatury w czasie dla regulatora dwupołożeniowego oraz regulatora PI które dają w przybliżeniu zerowe przeregulowanie i minimalny czas regulacji. Na podstawie zebranych danych porównano uchyby regulacji spowodowane włączeniem źródła ciepła jak i czas powrotu do zadanej temperatury po wyłączeniu rezystorów.
+W celu wprowadzenia do badanego układu zakłóceń zostały w ukladzie zastosowane rezystory wysokich mocy. Rezystory pełnią funkcję źródła ciepła i powodują nagrzewanie się komory termicznej. Aby sprawdzić działanie regulatorów w trakcie wystąpienia zakłóceń w momencie ustabilizowania się układu regulacji włączono źródło ciepła na 100\% mocy na czas pięciu minut. Na podstawie zebranych danych pomiarowych z czujnika temperatury wewnątrz komory termicznej wykreślono przebiegi temperatury w czasie dla regulatora dwupołożeniowego oraz regulatora PI które dają w przybliżeniu zerowe przeregulowanie przy minimalnym czasie regulacji. Na podstawie zebranych danych porównano uchyby regulacji spowodowane włączeniem źródła ciepła jak i czas powrotu do zadanej temperatury po wyłączeniu rezystorów.
 
 Wyniki przeprowadzonych badań zostały przedstawione na poniższych rysunkach.
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{Dwupolozeniowy_zak.png}
+    \caption{Regulacja dwupołożeniowa z zakłóceniami}
+    \end{figure}
+\end{center}
+\begin{center}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{PI_zak.png}
+    \caption{Regulacja regulatorem typu PI z zakłóceniami}
+    \end{figure}
+\end{center}
+\newpage
+
 \section{Porównanie sposobów regulacji}
+Regulator dwupołożeniowy pozwala na najszybsze osiągnięcie wartości zadanej gdyż moduł termoelektryczny od początku regulacji aż do osiągnięcia wartości docelowej temperatury w komorze termicznej pracuje z pełną wydajnością chłodniczą. Po osiągnięciu zadanej temperatury można zauważyć występowanie oscylacji wokół wartości zadanej które są zgodne z przewidywaniami i charakterystycznym działaniem regulatora dwupołożeniowego.
+
+Dla regulacji PI i nastaw regulatora wynoszących: $K_p = 13,2$ oraz $T_i = 9 min 50s$ układ dąży do wartości zadanej stosunkowo wolno. Atutem zastosowania powyższych nastaw jest brak lub minimum przeregulowań układu. Można na rysunku 6.2 zauważyć pomiary odbiegające od wartości zadanej jednakże są one spowodowane niedokładnością pomiarową użytych przyrządów pomiarowych oraz niedokładną izolacją układu.
+
+Dla $K_p = 15,4$ oraz $T_i = 6min 20s$ czyli dla układu w którym powinno wystąpić przeregulowanie wynoszące około 20\% uzyskano przeregulowanie około 10\% przy czasie regulacji wynoszącym około 17 minut.
+
+Metoda doboru nastaw pozwalająca na uzyskanie minimalnej całki kwadratu uchybu regulacji daje dobre wyniki w początkowych fazach regulacji. W późniejszym etapie można zauważyć powstanie oscylacji spowodowanych zbyt dużym wzmocnieniem układu.
+
+Na podstawie uzyskanych przebiegów temperatury w komorze chłodniczej w zależności od czasu można stwierdzić, że dla zbudowanego układu najodpowiedniejszą pośród zbadanych regulacją w której dopuszcza się oscylacje jest regulacja PI gdzie Kp = 15,4 i Ti = 380s. Jeśli układ nie może mieć przeregulowań należy wybrać regulator PI o nastawach Kp = 13,2 oraz Ti = 590s.
 
 \chapter{Podsumowanie}
 W pracy zostały zrealizowane wszystkie założenia projektowe. Została przytoczona część teoretyczna pozwalająca na zrozumienie reakcji zachodzących w termoelemencie w momencie przepływu przez niego prądu elektrycznego. Zostały omówione podstawowe prawa i efekty termoelektryczne takie jak efekt Seebecka, efekt Thomsona, zjawisko Joul'a na efekcie Peltiera będącym tematem niniejszej pracy kończąc.
